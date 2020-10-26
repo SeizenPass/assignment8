@@ -1,10 +1,20 @@
 public class Book {
     public String isbn, title, description;
+    public int count;
 
-    public Book(String isbn, String title, String description) {
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public Book(String isbn, String title, String description, int count) {
         this.isbn = isbn;
         this.title = title;
         this.description = description;
+        this.count = count;
     }
 
     public String getIsbn() {
