@@ -33,18 +33,18 @@ public class LibraryDatabase {
         return connection;
     }
 
-    /*public LibraryDatabase create(LibraryDatabase todo ) {
-        String sql = "INSERT INTO TODO ( task) VALUES ( ?)";
+    /*public LibraryDatabase create(LibraryDatabase rodo ) {
+        String sql = "INSERT INTO rODO ( task) VALUES ( ?)";
         try {
             Connection connection = getConnection();
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, todo.getTask());
+            ps.setString(1, rodo.getTask());
             ps.executeUpdate();
             ps.close();
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return todo;
+        return rodo;
     }*/
 }
