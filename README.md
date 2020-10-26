@@ -5,6 +5,13 @@ addBook.jsp
 book.jsp  
 addStudent.jsp  
 
+CREATE SEQUENCE public.users_id_seq
+    INCREMENT 1
+    START 1
+    MINVALUE 1
+    MAXVALUE 2147483647
+    CACHE 1;
+
 CREATE TABLE public.users
 (
     id integer NOT NULL DEFAULT nextval('users_id_seq'::regclass),
