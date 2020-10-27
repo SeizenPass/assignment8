@@ -2,9 +2,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class LibraryDatabase {
     private static LibraryDatabase instance = new LibraryDatabase();
@@ -15,7 +13,7 @@ public class LibraryDatabase {
 
     private LibraryDatabase() {}
 
-    private Connection getConnection()
+    public Connection getConnection()
     {
         Context initialContext;
         Connection connection = null;
