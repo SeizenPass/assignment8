@@ -22,8 +22,9 @@ public class UserServlet extends HttpServlet {
             String[] splits = pathInfo.split("/");
             int id = Integer.parseInt(splits[1]);
             req.setAttribute("userById", uDB.getUserById(id));
+            System.out.println(uDB.getUserById(1));
         }
-        req.getRequestDispatcher(req.getParameter("url")).forward(req, resp);
+        req.getRequestDispatcher((String)req.getAttribute("url")).forward(req, resp);
     }
 
     // POST/api/v1.0/users/
@@ -36,7 +37,7 @@ public class UserServlet extends HttpServlet {
         int access = Integer.parseInt(req.getParameter("access"));
         User user = new User(id, username, password, access);
         uDB.addUser(user);
-        req.getRequestDispatcher(req.getParameter("Auth")).forward(req, resp);
+        req.getRequestDispatcher((String)req.getAttribute("url")).forward(req, resp);
     }
 
     // PUT/api/v1.0/users/
@@ -49,7 +50,7 @@ public class UserServlet extends HttpServlet {
         int access = Integer.parseInt(req.getParameter("access"));
         User user = new User(id, username, password, access);
         uDB.modifyUser(user);
-        req.getRequestDispatcher(req.getParameter("url")).forward(req, resp);
+        req.getRequestDispatcher((String)req.getAttribute("url")).forward(req, resp);
     }
 
     // DELETE/api/v1.0/users/{id}
@@ -60,6 +61,6 @@ public class UserServlet extends HttpServlet {
         String[] splits = pathInfo.split("/");
         int id = Integer.parseInt(splits[1]);
         uDB.deleteUser(id);
-        req.getRequestDispatcher(req.getParameter("url")).forward(req, resp);
+        req.getRequestDispatcher((String)req.getAttribute("url")).forward(req, resp);
     }
 }

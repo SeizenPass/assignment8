@@ -47,7 +47,7 @@ CREATE TABLE public.books
 );
 
 # Working With UserServlet
-### *All Methods require destination url to be passed as a string PARAMETER*
+### *All Methods require destination url to be passed as a string ATTRIBUTE*
 
 ## GET/api/v1.0/users:
 ### gets all users in the database as a ArrayList<User> to the request attribute

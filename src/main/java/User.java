@@ -42,4 +42,14 @@ public class User {
     public void setAccess(int access) {
         this.access = access;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", access=" + access +
+                '}';
+    }
 }
