@@ -1,4 +1,7 @@
-<%@ page import="assignment8.User" %><%--
+<%@ page import="assignment8.User" %>
+<%@ page import="assignment8.Book" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   assignment8.User: Sungat Kaparov
   Date: 27.10.2020
@@ -11,11 +14,50 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <h1>Hello World</h1>
-<p>
-    <%User user = (User) request.getSession().getAttribute("user");
-    out.print(user.getUsername());
+    <h1>Book List:</h1>
+    <ol>
+        <%
+            List<Book> books = (ArrayList<Book>)request.getAttribute("books");
+            for (Book book: books) {
+                %>
+        <li> <a href="book?isbn=<%=book.getIsbn()%>"> <%= book.getTitle() %></a> <br> <%=book.getCount()%></li><hr>
+        <%
+            }
+        %>
+    </ol>
+    <%
+        User cur = (User)request.getSession().getAttribute("user");
+        if (cur.getAccess() == 2) {
     %>
-</p>
+    <form method="post" action="addBook">
+        <label>ISBN: <input type="text" name="isbn"></label><br>
+        <label>Title: <input type="text" name="title"></label><br>
+        <label>Description: <textarea name="description" rows="5"></textarea></label><br>
+        <label>Count: <input type="number" name="count"></label><br>
+        <input type="submit">
+    </form>
+     <% }  %>
+    <h1>User List:</h1>
+    <ol>
+        <%
+            List<User> users = (ArrayList<User>)request.getAttribute("users");
+            for (User user: users) {
+        %>
+        <li><a href="profile?id=<%=user.getId()%>"><%= user.getUsername() %></a></li><hr>
+        <%
+            }
+        %>
+    </ol>
+    <%
+    if (cur.getAccess() == 2) {
+    %>
+    <form method="post" action="addUser">
+        <label>Username: <input type="text" name="username"></label><br>
+        <label>Password: <input type="password" name="password"></label><br>
+        <label>Access: <input type="number" name="access"></label><br>
+        <input type="submit">
+    </form>
+    <% }  %>
+
 </body>
 </html>

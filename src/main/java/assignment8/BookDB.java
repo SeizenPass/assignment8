@@ -12,6 +12,7 @@ public class BookDB {
     private BookDB() {}
 
     public static BookDB getInstance() {
+        books = new ArrayList<>();
         init();
         return bookDB;
     }

@@ -7,11 +7,12 @@ import java.util.List;
 public class UserDB {
     private static UserDB userDB = new UserDB();
     private static Connection cn = LibraryDatabase.getInstance().getConnection();
-    private static List<User> users = new ArrayList<>();
+    private static List<User> users;
 
     private UserDB() {}
 
     public static UserDB getInstance() {
+        users = new ArrayList<>();
         init();
         return userDB;
     }
@@ -54,12 +55,11 @@ public class UserDB {
     public void addUser(User user) {
         users.add(user);
         try {
-            PreparedStatement ps = cn.prepareStatement("INSERT INTO users(id, username, password, access)" +
-                    "VALUES (?, ?, ?, ?)");
-            ps.setInt(1, user.getId());
-            ps.setString(2, user.getUsername());
-            ps.setString(3, user.getPassword());
-            ps.setInt(4, user.getAccess());
+            PreparedStatement ps = cn.prepareStatement("INSERT INTO users(username, password, access)" +
+                    "VALUES (?, ?, ?)");
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getPassword());
+            ps.setInt(3, user.getAccess());
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {

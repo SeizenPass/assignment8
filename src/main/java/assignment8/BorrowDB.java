@@ -3,17 +3,17 @@ package assignment8;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class BorrowDB {
     private static BorrowDB borrowDB = new BorrowDB();
     private static Connection cn = LibraryDatabase.getInstance().getConnection();
-    private static List<Borrow> borrows = new ArrayList<>();
+    private static List<Borrow> borrows;
 
     private BorrowDB() {}
 
     public static BorrowDB getInstance() {
+        borrows = new ArrayList<>();
         init();
         return borrowDB;
     }
