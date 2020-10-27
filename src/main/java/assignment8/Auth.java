@@ -17,24 +17,20 @@ public class Auth extends HttpServlet {
         String password = request.getParameter("password");
         UserDB uDB = UserDB.getInstance();
         List<User> users = uDB.getUsers();
-
         for (User userList:users){
             if (userList.getUsername().equals(username) && userList.getPassword().equals(password)){
+                request.getSession().setAttribute("user", userList);
                 response.sendRedirect("dashboard.jsp");
-                Cookie usernamec = new Cookie("username", username);
-                Cookie passwordc = new Cookie("password", password);
-                usernamec.setMaxAge(60*30);
-                passwordc.setMaxAge(60*30);
-                response.addCookie(usernamec);
-                response.addCookie(passwordc);
             }else {
                 PrintWriter out = response.getWriter();
                 out.println("Such user does not exist");
             }
         }
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = new User(-1, "Guest", "", 0);
+        request.getSession().setAttribute("user", user);
+        response.sendRedirect("dashboard.jsp");
     }
 }

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="assignment8.User" %><%--
   Created by IntelliJ IDEA.
   assignment8.User: Sungat Kaparov
   Date: 27.10.2020
@@ -12,5 +12,10 @@
 </head>
 <body>
     <h1>Hello World</h1>
+<p>
+    <%User user = (User) request.getSession().getAttribute("user");
+    out.print(user.getUsername());
+    %>
+</p>
 </body>
 </html>
