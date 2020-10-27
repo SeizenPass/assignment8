@@ -45,3 +45,21 @@ CREATE TABLE public.books
     count integer NOT NULL,
     CONSTRAINT books_pkey PRIMARY KEY (isbn)
 );
+
+# Working With UserServlet
+### *All Methods require destination url to be passed as a string PARAMETER*
+
+## GET/api/v1.0/users:
+### gets all users in the database as a ArrayList<User> to the request attribute
+
+## GET/api/v1.0/users/{id}:
+### gets a single user from the database by his (id) as User object to the request attribute
+
+## POST/api/v1.0/users
+### adds a row to the database Users, requires (id, username, password, access) parameters to be passed
+
+## PUT/api/v1.0/users/
+### modifies a row in the database Users, requires (id, username, password, access) parameters to be passed
+
+## DELETE/api/v1.0/users/{id}
+### deletes a row in the database Users depending on his (id)

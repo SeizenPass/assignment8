@@ -9,7 +9,7 @@ import java.io.IOException;
 public class UserServlet extends HttpServlet {
 
     // GET/api/v1.0/users/
-    // GET/api/v1.0/users/id
+    // GET/api/v1.0/users/{id}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDB uDB = UserDB.getInstance();
@@ -52,7 +52,7 @@ public class UserServlet extends HttpServlet {
         req.getRequestDispatcher(req.getParameter("url")).forward(req, resp);
     }
 
-    // DELETE/api/v1.0/users/id
+    // DELETE/api/v1.0/users/{id}
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserDB uDB = UserDB.getInstance();
