@@ -46,14 +46,14 @@ CREATE TABLE public.books
     CONSTRAINT books_pkey PRIMARY KEY (isbn)
 );
 
-# Working With UserServlet
+# Working With assignment8.UserServlet
 ### *All Methods require destination url to be passed as a string ATTRIBUTE*
 
 ## GET/api/v1.0/users:
-### gets all users in the database as a ArrayList<User> to the request attribute
+### gets all users in the database as a ArrayList<assignment8.User> to the request attribute
 
 ## GET/api/v1.0/users/{id}:
-### gets a single user from the database by his (id) as User object to the request attribute
+### gets a single user from the database by his (id) as assignment8.User object to the request attribute
 
 ## POST/api/v1.0/users
 ### adds a row to the database Users, requires (id, username, password, access) parameters to be passed
@@ -64,7 +64,7 @@ CREATE TABLE public.books
 ## DELETE/api/v1.0/users/{id}
 ### deletes a row in the database Users depending on his (id)
 
-login.jsp: redirects to Auth.java
-Auth.java: doPost Method creates cookies if username and password contains in the table Users,
+login.jsp: redirects to assignment8.Auth.java
+assignment8.Auth.java: doPost Method creates cookies if username and password contains in the table Users,
 also if the data written in the login form does not equals the data in the Users table, then error message appears
  

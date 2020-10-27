@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Sungat Kaparov
+  assignment8.User: Sungat Kaparov
   Date: 27.10.2020
   Time: 18:05
   To change this template use File | Settings | File Templates.

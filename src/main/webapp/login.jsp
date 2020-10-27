@@ -1,6 +1,6 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Sungat Kaparov
+  assignment8.User: Sungat Kaparov
   Date: 27.10.2020
   Time: 16:19
   To change this template use File | Settings | File Templates.
@@ -28,7 +28,7 @@
 <%--        }--%>
 <%--    %>--%>
     <h1>Login Form</h1>
-    <form method="post" action="Auth">
+    <form method="post" action="auth">
         <label>Username:</label><br>
         <input type="text" name="username"><br>
         <label>Password:</label><br>

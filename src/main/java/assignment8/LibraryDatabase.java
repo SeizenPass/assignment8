@@ -1,3 +1,5 @@
+package assignment8;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -31,7 +33,7 @@ public class LibraryDatabase {
         return connection;
     }
 
-    /*public LibraryDatabase create(LibraryDatabase rodo ) {
+    /*public assignment8.LibraryDatabase create(assignment8.LibraryDatabase rodo ) {
         String sql = "INSERT INTO rODO ( task) VALUES ( ?)";
         try {
             Connection connection = getConnection();
