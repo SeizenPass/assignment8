@@ -10,13 +10,15 @@ import java.sql.*;
 
 @WebServlet(name = "ProfileServlet", value = "/profile")
 public class ProfileServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User cur = (User)request.getSession().getAttribute("user");
         if (cur != null && cur.getAccess() >= 2) {
-            User user = UserDB.getInstance().getUserById(Integer.parseInt(request.getParameter("id")));
+            UserDB db = UserDB.getInstance();
+            User user = db.getUserById(Integer.parseInt(request.getParameter("id")));
             user.setPassword(request.getParameter("password"));
             user.setUsername(request.getParameter("username"));
-            UserDB.getInstance().modifyUser(user);
+            db.modifyUser(user);
         }
     }
 

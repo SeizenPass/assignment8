@@ -19,12 +19,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         function changeData() {
-            user = $('#user')
-            username = user.children('#username').val()
-            password = user.children('#password').val()
+            var user = $('#user'),
+                username = user.children('#username').val(),
+                password = user.children('#password').val()
             $.ajax({
                 url: 'profile',
-                type: "POST",
+                type: "PUT",
                 data: {
                     id: <%=user.getId()%>,
                     password: password,
