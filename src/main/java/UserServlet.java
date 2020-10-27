@@ -36,7 +36,7 @@ public class UserServlet extends HttpServlet {
         int access = Integer.parseInt(req.getParameter("access"));
         User user = new User(id, username, password, access);
         uDB.addUser(user);
-        req.getRequestDispatcher(req.getParameter("url")).forward(req, resp);
+        req.getRequestDispatcher(req.getParameter("Auth")).forward(req, resp);
     }
 
     // PUT/api/v1.0/users/

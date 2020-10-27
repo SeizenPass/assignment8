@@ -63,3 +63,8 @@ CREATE TABLE public.books
 
 ## DELETE/api/v1.0/users/{id}
 ### deletes a row in the database Users depending on his (id)
+
+login.jsp: redirects to Auth.java
+Auth.java: doPost Method creates cookies if username and password contains in the table Users,
+also if the data written in the login form does not equals the data in the Users table, then error message appears
+ 
