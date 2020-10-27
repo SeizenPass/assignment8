@@ -35,6 +35,6 @@
         <input type="password" name="password"><br>
         <input type="submit">
     </form>
-    <h6>If you want to be a guest, type "guest" in Username field and press Submit</h6>
+    <a href="auth">Login as Guest</a>
 </body>
 </html>
