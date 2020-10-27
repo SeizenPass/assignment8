@@ -11,7 +11,7 @@ import java.sql.*;
 @WebServlet(name = "ProfileServlet", value = "/profile")
 public class ProfileServlet extends HttpServlet {
 
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User cur = (User)request.getSession().getAttribute("user");
         if (cur != null && cur.getAccess() >= 2) {
             UserDB db = UserDB.getInstance();

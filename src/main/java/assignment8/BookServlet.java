@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @WebServlet(name = "BookServlet", value = "/book")
 public class BookServlet extends HttpServlet {
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User cur = (User)request.getSession().getAttribute("user");
         if (cur != null && cur.getAccess() >= 2) {
             BookDB db = BookDB.getInstance();

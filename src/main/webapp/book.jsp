@@ -17,12 +17,12 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         function updateBook() {
-            var book = $('#book'),
-                title = $('#title').val(),
-                description = $('#description').val()
+            book = $('#book')
+            title = $('#title').val()
+            description = $('#description').val()
             $.ajax({
                 url: 'book',
-                type: "PUT",
+                type: "POST",
                 data: {
                     isbn: '<%=book.getIsbn()%>',
                     title: title,

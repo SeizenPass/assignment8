@@ -24,7 +24,7 @@
                 password = user.children('#password').val()
             $.ajax({
                 url: 'profile',
-                type: "PUT",
+                type: "POST",
                 data: {
                     id: <%=user.getId()%>,
                     password: password,

@@ -60,7 +60,7 @@ public class BookDB {
             ps.setString(2, book.getTitle());
             ps.setString(3, book.getDescription());
             ps.setInt(4, book.getCount());
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,17 +73,18 @@ public class BookDB {
                 b.setTitle(book.getTitle());
                 b.setDescription(book.getDescription());
                 b.setCount(book.getCount());
+                break;
             }
         }
         try {
-            PreparedStatement ps = cn.prepareStatement("UPDATE books" +
+            PreparedStatement ps = cn.prepareStatement("UPDATE books " +
                     "SET title=?, description=?, count=?" +
                     "WHERE isbn=?");
             ps.setString(1, book.getTitle());
             ps.setString(2, book.getDescription());
             ps.setInt(3, book.getCount());
             ps.setString(4, book.getIsbn());
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,7 +97,7 @@ public class BookDB {
             PreparedStatement ps = cn.prepareStatement("DELETE FROM books" +
                     "WHERE isbn=?");
             ps.setString(1, isbn);
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

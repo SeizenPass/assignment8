@@ -19,6 +19,16 @@ public class Book {
         this.count = count;
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "isbn='" + isbn + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", count=" + count +
+                '}';
+    }
+
     public String getIsbn() {
         return isbn;
     }

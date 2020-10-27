@@ -60,7 +60,7 @@ public class UserDB {
             ps.setString(2, user.getUsername());
             ps.setString(3, user.getPassword());
             ps.setInt(4, user.getAccess());
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,17 +73,18 @@ public class UserDB {
                 u.setUsername(user.getUsername());
                 u.setPassword(user.getPassword());
                 u.setAccess(user.getAccess());
+                break;
             }
         }
         try {
-            PreparedStatement ps = cn.prepareStatement("UPDATE users" +
+            PreparedStatement ps = cn.prepareStatement("UPDATE users " +
                     "SET username=?, password=?, access=?" +
                     "WHERE id=?");
             ps.setString(1, user.getUsername());
             ps.setString(2, user.getPassword());
             ps.setInt(3, user.getAccess());
             ps.setInt(4, user.getId());
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,7 +97,7 @@ public class UserDB {
             PreparedStatement ps = cn.prepareStatement("DELETE FROM users" +
                     "WHERE id=?");
             ps.setInt(1, id);
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();

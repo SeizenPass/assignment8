@@ -59,7 +59,7 @@ public class BorrowDB {
                     "VALUES (?, ?)");
             ps.setInt(1, user.getId());
             ps.setString(2, book.getIsbn());
-            ps.executeQuery();
+            ps.executeUpdate();
 
             ps = cn.prepareStatement("SELECT currval('borrows_id_seq'::regclass)");
             ResultSet rs = ps.executeQuery();
@@ -79,7 +79,7 @@ public class BorrowDB {
             PreparedStatement ps = cn.prepareStatement("DELETE FROM borrows" +
                     "WHERE id=?");
             ps.setInt(1, id);
-            ps.executeQuery();
+            ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
