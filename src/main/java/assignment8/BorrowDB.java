@@ -70,6 +70,11 @@ public class BorrowDB {
             ps.setString(2, book.getIsbn());
             ps.executeUpdate();
 
+            ps = cn.prepareStatement("UPDATE books SET count=? WHERE isbn=?");
+            ps.setInt(1,book.getCount()-1);
+            ps.setString(2, book.getIsbn());
+            ps.executeUpdate();
+
             ps = cn.prepareStatement("SELECT currval('borrows_id_seq'::regclass)");
             ResultSet rs = ps.executeQuery();
             while(rs.next()) {
@@ -79,15 +84,29 @@ public class BorrowDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        book.setCount(book.getCount()-1);
         borrows.add(new Borrow(id, book, user));
     }
 
     public void deleteBorrow(int id) {
-        borrows.removeIf(b -> b.getId() == id);
+        String isbn = "";
+        int count = 0;
+        for (Borrow b: borrows) {
+            if (b.getId() == id) {
+                isbn = b.book.getIsbn();
+                count = b.book.getCount();
+                borrows.remove(b);
+            }
+        }
         try {
             PreparedStatement ps = cn.prepareStatement("DELETE FROM borrows " +
                     "WHERE id=?");
             ps.setInt(1, id);
+            ps.executeUpdate();
+
+            ps = cn.prepareStatement("UPDATE books SET count=? WHERE isbn=?");
+            ps.setInt(1, count+1);
+            ps.setString(2, isbn);
             ps.executeUpdate();
             ps.close();
         } catch (SQLException e) {
