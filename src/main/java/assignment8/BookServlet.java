@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "BookServlet", value = "/book")
 public class BookServlet extends HttpServlet {
@@ -21,8 +22,11 @@ public class BookServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Book book = BookDB.getInstance().getBookByIsbn(request.getParameter("isbn"));
+        String isbn = request.getParameter("isbn");
+        Book book = BookDB.getInstance().getBookByIsbn(isbn);
+        List<Borrow> borrows = BorrowDB.getInstance().getBorrowsByIsbn(isbn);
         request.setAttribute("book", book);
+        request.setAttribute("borrows", borrows);
         request.getRequestDispatcher("book.jsp").forward(request, response);
     }
 }

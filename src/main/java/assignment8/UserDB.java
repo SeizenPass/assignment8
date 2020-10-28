@@ -94,7 +94,7 @@ public class UserDB {
     public void deleteUser(int id) {
         users.removeIf(u -> u.getId() == id);
         try {
-            PreparedStatement ps = cn.prepareStatement("DELETE FROM users" +
+            PreparedStatement ps = cn.prepareStatement("DELETE FROM users " +
                     "WHERE id=?");
             ps.setInt(1, id);
             ps.executeUpdate();

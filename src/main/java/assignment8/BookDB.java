@@ -95,7 +95,7 @@ public class BookDB {
     public void deleteBook(String isbn) {
         books.removeIf(b -> b.getIsbn().equals(isbn));
         try {
-            PreparedStatement ps = cn.prepareStatement("DELETE FROM books" +
+            PreparedStatement ps = cn.prepareStatement("DELETE FROM books " +
                     "WHERE isbn=?");
             ps.setString(1, isbn);
             ps.executeUpdate();

@@ -1,5 +1,7 @@
 <%@ page import="assignment8.Book" %>
-<%@ page import="assignment8.User" %><%--
+<%@ page import="assignment8.User" %>
+<%@ page import="assignment8.Borrow" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Amiran
   Date: 27-Oct-20
@@ -10,6 +12,7 @@
 <%
     Book book = (Book)request.getAttribute("book");
     User currentUser = (User) session.getAttribute("user");
+    List<Borrow> borrows = (List<Borrow>)request.getAttribute("borrows");
 %>
 <html>
 <head>
@@ -34,7 +37,7 @@
             });
         }
         function borrow() {
-
+            //TODO implement borrow as a student
         }
     </script>
 </head>
@@ -64,7 +67,21 @@
     <%
     }
     %>
-    <h4>Stock: <%=book.getCount()%>></h4>
+    <h4>Stock: <%=book.getCount()%></h4>
+    <h3>Debtors:</h3>
+    <ul>
+    <%
+        for (Borrow borrow:
+             borrows) {
+            User user = borrow.getUser();
+            %>
+        <li>
+            <a href="profile?id=<%=user.getId()%>"><%=user.getUsername()%></a>
+        </li>
+    <%
+        }
+    %>
+    </ul>
 </div>
 </body>
 </html>

@@ -51,6 +51,15 @@ public class BorrowDB {
         }
         return userBorrow;
     }
+    public List<Borrow> getBorrowsByIsbn(String isbn) {
+        List<Borrow> userBorrow = new ArrayList<>();
+        for (Borrow borrow: borrows) {
+            if (borrow.getBook().getIsbn().equals(isbn)) {
+                userBorrow.add(borrow);
+            }
+        }
+        return userBorrow;
+    }
 
     public void addBorrow(User user, Book book) {
         int id = -1;
@@ -76,7 +85,7 @@ public class BorrowDB {
     public void deleteBorrow(int id) {
         borrows.removeIf(b -> b.getId() == id);
         try {
-            PreparedStatement ps = cn.prepareStatement("DELETE FROM borrows" +
+            PreparedStatement ps = cn.prepareStatement("DELETE FROM borrows " +
                     "WHERE id=?");
             ps.setInt(1, id);
             ps.executeUpdate();
