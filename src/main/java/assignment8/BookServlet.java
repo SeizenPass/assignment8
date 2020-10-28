@@ -12,12 +12,36 @@ import java.util.List;
 public class BookServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         User cur = (User)request.getSession().getAttribute("user");
+        if (cur != null && cur.getAccess() == 1) {
+            String action = request.getParameter("action").toUpperCase();
+            switch (action) {
+                case "BORROW":
+                    Book borrowBook = BookDB.getInstance().getBookByIsbn(request.getParameter("isbn"));
+                    BorrowDB db = BorrowDB.getInstance();
+                    db.addBorrow(cur, borrowBook);
+                    break;
+            }
+        }
         if (cur != null && cur.getAccess() >= 2) {
+            String action = request.getParameter("action").toUpperCase();
             BookDB db = BookDB.getInstance();
-            Book book = db.getBookByIsbn(request.getParameter("isbn"));
-            book.setTitle(request.getParameter("title"));
-            book.setDescription(request.getParameter("description"));
-            db.modifyBook(book);
+            switch (action) {
+                case "UPDATE":
+                    Book book = db.getBookByIsbn(request.getParameter("isbn"));
+                    book.setTitle(request.getParameter("title"));
+                    book.setDescription(request.getParameter("description"));
+                    db.modifyBook(book);
+                    break;
+                case "ADD":
+                    String isbn = request.getParameter("isbn"),
+                            title = request.getParameter("title"),
+                            description = request.getParameter("description");
+                    int count = Integer.parseInt(request.getParameter("count"));
+                    Book newBook = new Book(isbn, title, description, count);
+                    db.addBook(newBook);
+                    response.sendRedirect("dashboard");
+                    break;
+            }
         }
     }
 

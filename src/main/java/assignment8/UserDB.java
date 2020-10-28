@@ -53,7 +53,7 @@ public class UserDB {
     }
 
     public void addUser(User user) {
-        users.add(user);
+        int id = 0;
         try {
             PreparedStatement ps = cn.prepareStatement("INSERT INTO users(username, password, access)" +
                     "VALUES (?, ?, ?)");
@@ -62,6 +62,13 @@ public class UserDB {
             ps.setInt(3, user.getAccess());
             ps.executeUpdate();
             ps.close();
+            ps = cn.prepareStatement("SELECT currval('users_id_seq'::regclass)");
+            ResultSet res = ps.executeQuery();
+            while (res.next()) {
+                id = res.getInt(1);
+            }
+            user.setId(id);
+            users.add(user);
         } catch (SQLException e) {
             e.printStackTrace();
         }

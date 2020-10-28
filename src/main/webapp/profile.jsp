@@ -36,7 +36,7 @@
                     action: "update"
                 }, accepts: "application/json; charset=utf-8",
                 success: function (data) {
-
+                    location.reload();
                 }
             });
         }
@@ -49,7 +49,7 @@
                     action: "delete"
                 }, accepts: "application/json; charset=utf-8",
                 success: function (data) {
-
+                    location.reload();
                 }
             });
         }
@@ -64,7 +64,7 @@
                     action: "deleteBorrow"
                 }, accepts: "application/json; charset=utf-8",
                 success: function (data) {
-
+                    location.reload();
                 }
             });
         }
@@ -98,7 +98,13 @@
                             %>
                     <li>
                         <a href="book?isbn=<%=book.getIsbn()%>"><%=book.getTitle()%></a><br>
+                        <%
+                        if (currentUser.getAccess() >= 2) {
+                            %>
                         <button onclick="deleteBorrow('<%=book.getIsbn()%>', <%=borrow.getId()%>)">Delete Borrow</button>
+                        <%
+                        }
+                        %>
                         <hr>
                     </li>
                     <%

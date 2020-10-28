@@ -96,6 +96,7 @@ public class BorrowDB {
                 isbn = b.book.getIsbn();
                 count = b.book.getCount();
                 borrows.remove(b);
+                break;
             }
         }
         try {

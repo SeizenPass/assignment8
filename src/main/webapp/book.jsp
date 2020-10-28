@@ -32,12 +32,23 @@
                     description: description
                 }, accepts: "application/json; charset=utf-8",
                 success: function (data) {
-
+                    location.reload();
                 }
             });
         }
         function borrow() {
             //TODO implement borrow as a student
+            $.ajax({
+                url: 'book',
+                type: "POST",
+                data: {
+                    action: "borrow",
+                    isbn: '<%=book.getIsbn()%>'
+                }, accepts: "application/json; charset=utf-8",
+                success: function (data) {
+                    location.reload();
+                }
+            });
         }
     </script>
 </head>
@@ -52,7 +63,7 @@
     <h4>Description: </h4><br>
     <p><%=book.getDescription()%></p>
     <%
-        if (currentUser.getAccess() == 1) {
+        if (currentUser.getAccess() == 1 && book.getCount() > 0) {
             %>
     <button onclick="borrow()">Borrow</button>
     <%

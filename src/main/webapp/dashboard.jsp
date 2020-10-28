@@ -17,8 +17,10 @@
     <h1>Book List:</h1>
     <ol>
         <%
+            User cur = (User)request.getSession().getAttribute("user");
             List<Book> books = (ArrayList<Book>)request.getAttribute("books");
             for (Book book: books) {
+                if (book.getCount() <= 0 && cur.getAccess() < 2) continue;
                 %>
         <li> <a href="book?isbn=<%=book.getIsbn()%>"> <%= book.getTitle() %></a> <br> <%=book.getCount()%></li><hr>
         <%
@@ -26,10 +28,10 @@
         %>
     </ol>
     <%
-        User cur = (User)request.getSession().getAttribute("user");
         if (cur.getAccess() == 2) {
     %>
-    <form method="post" action="addBook">
+    <form method="post" action="book">
+        <input type="hidden" value="add" name="action">
         <label>ISBN: <input type="text" name="isbn"></label><br>
         <label>Title: <input type="text" name="title"></label><br>
         <label>Description: <textarea name="description" rows="5"></textarea></label><br>
@@ -51,7 +53,8 @@
     <%
     if (cur.getAccess() == 2) {
     %>
-    <form method="post" action="addUser">
+    <form method="post" action="profile">
+        <input type="hidden" value="add" name="action">
         <label>Username: <input type="text" name="username"></label><br>
         <label>Password: <input type="password" name="password"></label><br>
         <label>Access: <input type="number" name="access"></label><br>

@@ -29,7 +29,14 @@ public class ProfileServlet extends HttpServlet {
                     break;
                 case "DELETEBORROW":
                     BorrowDB.getInstance().deleteBorrow(Integer.parseInt(request.getParameter("borrow")));
-                    //TODO count++ in books table using transaction
+                    break;
+                case "ADD":
+                    String username = request.getParameter("username"),
+                            password = request.getParameter("password");
+                    int access = Integer.parseInt(request.getParameter("access"));
+                    User newUser = new User(-1, username, password, access);
+                    db.addUser(newUser);
+                    response.sendRedirect("dashboard");
                 default:
                     break;
             }
