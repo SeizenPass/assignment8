@@ -17,6 +17,10 @@
 <html>
 <head>
     <title>Book: <%=book.getTitle()%></title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         function updateBook() {
@@ -52,15 +56,16 @@
         }
     </script>
 </head>
-<body>
+<body class="container">
 <div id="book">
-    <h3>Book</h3><br>
-    <h6>ISBN: <%=book.getIsbn()%></h6><br>
+    <form class="form3">
+    <h3>Book</h3>
+    <h6>ISBN: <%=book.getIsbn()%></h6>
     <%
     if (currentUser.getAccess() < 2) {
         %>
-    <h4>Title: <%=book.getTitle()%></h4><br>
-    <h4>Description: </h4><br>
+    <h4>Title: <%=book.getTitle()%></h4>
+    <h4>Description: </h4>
     <p><%=book.getDescription()%></p>
     <%
         if (currentUser.getAccess() == 1 && book.getCount() > 0) {
@@ -71,28 +76,29 @@
     }
     else {
         %>
-    <h4>Title: <input type="text" name="title" id="title" value="<%=book.getTitle()%>"></h4><br>
-    <h4>Description: </h4><br>
-    <textarea id="description"><%=book.getDescription()%></textarea>
-    <button onclick="updateBook()">Change Data</button>
+    <h4>Title: <input type="text" class="form-control" name="title" id="title" value="<%=book.getTitle()%>"></h4>
+    <h4>Description: </h4>
+    <textarea id="description" class="form-control"><%=book.getDescription()%></textarea><br>
+    <button onclick="updateBook()" class="btn btn-primary">Change Data</button>
     <%
     }
     %>
     <h4>Stock: <%=book.getCount()%></h4>
     <h3>Debtors:</h3>
-    <ul>
+    <ul class="list-group">
     <%
         for (Borrow borrow:
              borrows) {
             User user = borrow.getUser();
             %>
-        <li>
+        <li class="list-group-item d-flex justify-content-between align-items-center">
             <a href="profile?id=<%=user.getId()%>"><%=user.getUsername()%></a>
         </li>
     <%
         }
     %>
     </ul>
+    </form>
 </div>
 </body>
 </html>

@@ -20,6 +20,10 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
         function changeData() {
@@ -70,8 +74,9 @@
         }
     </script>
 </head>
-<body>
+<body class="container">
 <div id="user">
+    <form class="form3">
     <h2>Profile</h2>
     <%
         if (currentUser.getAccess() < 2) {
@@ -81,27 +86,27 @@
         }
         else {
             %>
-                <input type="text" name="username" value="<%=user.getUsername()%>" id="username"><br>
-                <input type="password" name="password" value="<%=user.getPassword()%>" id="password"><br>
-                <button onclick="changeData()">Change Data</button><br>
-                <button onclick="deleteUser()">Delete User</button>
+                <input type="text" name="username" class="form-control" value="<%=user.getUsername()%>" id="username"><br>
+                <input type="password" name="password" class="form-control" value="<%=user.getPassword()%>" id="password"><br>
+                <button onclick="changeData()" class="btn btn-primary">Change Data</button><br><br>
+                <button onclick="deleteUser()" class="btn btn-primary">Delete User</button>
                 <%
         }
     %>
             <div id="borrows">
                 <h3>Borrows:</h3>
-                <ul>
+                <ul class="list-group">
                     <%
                         for (Borrow borrow:
                              borrows) {
                             Book book = borrow.getBook();
                             %>
-                    <li>
-                        <a href="book?isbn=<%=book.getIsbn()%>"><%=book.getTitle()%></a><br>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="book?isbn=<%=book.getIsbn()%>"><%=book.getTitle()%></a>
                         <%
                         if (currentUser.getAccess() >= 2) {
                             %>
-                        <button onclick="deleteBorrow('<%=book.getIsbn()%>', <%=borrow.getId()%>)">Delete Borrow</button>
+                        <button class="btn btn-primary" onclick="deleteBorrow('<%=book.getIsbn()%>', <%=borrow.getId()%>)">Delete Borrow</button>
                         <%
                         }
                         %>
@@ -112,6 +117,7 @@
                     %>
                 </ul>
             </div>
+    </form>
 </div>
 </body>
 </html>

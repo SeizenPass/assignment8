@@ -1,0 +1,37 @@
+.container{
+    padding: 0;
+    margin: 0;
+    background-color: beige;
+    text-align: center;
+}
+.form{
+    height: auto;
+    margin: 2rem auto;
+    border: 2px solid skyblue;
+    padding: 2rem;
+    width: 50%;
+    border-radius: 5px;
+}
+.form1{
+    height: auto;
+    margin: 2rem auto;
+    width: 50%;
+    float: left;
+}
+.form2{
+    height: auto;
+    border: 2px solid skyblue;
+    width: 100%;
+    border-radius: 5px;
+    float: left;
+}
+.form3{
+    height: auto;
+    margin: 2rem auto;
+    width: 50%;
+    text-align: center;
+}
+.book,.user{
+    width: 50%;
+    float: left;
+}
