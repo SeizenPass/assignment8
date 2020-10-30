@@ -21,11 +21,10 @@ public class Auth extends HttpServlet {
             if (userList.getUsername().equals(username) && userList.getPassword().equals(password)){
                 request.getSession().setAttribute("user", userList);
                 response.sendRedirect("dashboard");
-            }else {
-                PrintWriter out = response.getWriter();
-                out.println("Such user does not exist");
             }
         }
+        PrintWriter out = response.getWriter();
+        out.println("Such user does not exist");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

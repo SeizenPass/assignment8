@@ -22,37 +22,40 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script>
-        function updateBook() {
-            book = $('#book')
-            title = $('#title').val()
-            description = $('#description').val()
-            $.ajax({
-                url: 'book',
-                type: "POST",
-                data: {
-                    isbn: '<%=book.getIsbn()%>',
-                    title: title,
-                    description: description
-                }, accepts: "application/json; charset=utf-8",
-                success: function (data) {
-                    location.reload();
-                }
+        $( document ).ready(function () {
+            $('#updateBookButton').click(function () {
+                book = $('#book')
+                title = $('#title').val()
+                description = $('#description').val()
+                $.ajax({
+                    url: 'book',
+                    type: "POST",
+                    data: {
+                        isbn: '<%=book.getIsbn()%>',
+                        title: title,
+                        description: description,
+                        action: 'update'
+                    }, accepts: "application/x-www-form-urlencoded; charset=UTF-8",
+                    success: function (data) {
+                        location.reload()
+                    }
+                });
             });
-        }
-        function borrow() {
-            //TODO implement borrow as a student
-            $.ajax({
-                url: 'book',
-                type: "POST",
-                data: {
-                    action: "borrow",
-                    isbn: '<%=book.getIsbn()%>'
-                }, accepts: "application/json; charset=utf-8",
-                success: function (data) {
-                    location.reload();
-                }
+            $('#borrowButton').click(function () {
+                $.ajax({
+                    url: 'book',
+                    type: "POST",
+                    data: {
+                        action: "borrow",
+                        isbn: '<%=book.getIsbn()%>'
+                    }, accepts: "application/x-www-form-urlencoded; charset=UTF-8",
+                    success: function (data) {
+                        location.reload()
+                    }
+                });
             });
-        }
+        });
+
     </script>
 </head>
 <body class="container">
@@ -69,7 +72,7 @@
     <%
         if (currentUser.getAccess() == 1 && book.getCount() > 0) {
             %>
-    <button onclick="borrow()">Borrow</button>
+    <input type="button" id="borrowButton" value="Borrow">
     <%
         }
     }
@@ -78,7 +81,7 @@
     <h4>Title: <input type="text" class="form-control" name="title" id="title" value="<%=book.getTitle()%>"></h4>
     <h4>Description: </h4>
     <textarea id="description" class="form-control"><%=book.getDescription()%></textarea><br>
-    <button onclick="updateBook()" class="btn btn-primary">Change Data</button>
+    <input type="button" class="btn btn-primary" id="updateBookButton" value="Change Data">
     <%
     }
     %>

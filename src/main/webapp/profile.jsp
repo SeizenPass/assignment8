@@ -87,8 +87,8 @@
             %>
                 <input type="text" name="username" class="form-control" value="<%=user.getUsername()%>" id="username"><br>
                 <input type="password" name="password" class="form-control" value="<%=user.getPassword()%>" id="password"><br>
-                <button onclick="changeData()" class="btn btn-primary">Change Data</button><br><br>
-                <button onclick="deleteUser()" class="btn btn-primary">Delete User</button>
+                <input type="button" onclick="changeData()" value="Change Data"><br><br>
+                <input type="button" onclick="deleteUser()" value="Delete User">
                 <%
         }
     %>
